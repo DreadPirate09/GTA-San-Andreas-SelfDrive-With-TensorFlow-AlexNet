@@ -40,7 +40,7 @@ def main():
     while(True):
         # 800x600 windowed mode
         print('getting the frame with number: '+str(len(training_data)))
-        screen = grab_screen(region=(0,40,800,640))
+        screen = grab_screen(region=(0,340,800,640))
         if screen is not None:
             screen = cv2.cvtColor(screen, cv2.COLOR_BGR2GRAY)
         else:
@@ -51,6 +51,7 @@ def main():
         keys = key_check()
         output = keys_to_output(keys)
         training_data.append([screen,output])
+        np_training_data = np.array(training_data, dtype=object)
         
         if cv2.waitKey(25) & 0xFF == ord('q'):
             cv2.destroyAllWindows()
@@ -58,6 +59,6 @@ def main():
 
         if len(training_data) % 500 == 0:
             print(len(training_data))
-            np.save(file_name,training_data)
+            np.save(file_name,np_training_data)
 
 main()
