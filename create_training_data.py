@@ -29,6 +29,34 @@ def keys_to_output(keys):
     else:
         output[1] = 1
     return output
+
+def showImage(img):
+
+    cv2.imshow('test',img)
+    if cv2.waitKey(25) & 0xFF == ord('q'):
+        cv2.destroyAllWindows()
+
+def get_specified_square_screen(x1, y1, x2, y2):
+    screen = grab_screen(region=(x1, y1, x2, y2))
+    if screen is not None:
+        screen = cv2.cvtColor(screen, cv2.COLOR_BGR2GRAY)
+    else:
+        print("Error: Screen capture failed.")
+    return screen
+
+def get_specified_circle_screen(x1, y1, x2, y2, radius):
+    screen = grab_screen(region=(x1, y1, x2, y2))
+    if screen is not None:
+        screen = cv2.cvtColor(screen, cv2.COLOR_BGR2GRAY)
+    else:
+        print("Error: Screen capture failed.")
+
+    center = (screen.shape[1] // 2, screen.shape[0] // 2)  # Center of the image
+    mask = np.zeros_like(screen)
+    cv2.circle(mask, center, radius, (255, 255, 255), -1)
+    result = cv2.bitwise_and(screen, mask)
+
+    return result
     
 
 def main():
@@ -40,14 +68,11 @@ def main():
     while(True):
         # 800x600 windowed mode
         print('getting the frame with number: '+str(len(training_data)))
-        screen = grab_screen(region=(0,340,800,640))
-        if screen is not None:
-            screen = cv2.cvtColor(screen, cv2.COLOR_BGR2GRAY)
-        else:
-            print("Error: Screen capture failed.")
+        screen = get_specified_circle_screen(100, 1100, 300, 1300, 100)
+        showImage(screen)
         last_time = time.time()
         # resize to something a bit more acceptable for a CNN
-        screen = cv2.resize(screen, (80,60))
+        screen = cv2.resize(screen, (40,40))
         keys = key_check()
         output = keys_to_output(keys)
         training_data.append([screen,output])
