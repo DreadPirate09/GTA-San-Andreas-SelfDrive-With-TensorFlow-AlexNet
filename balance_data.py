@@ -39,8 +39,11 @@ for data in train_data:
 		print('no matches!!!!!!')
 
 forwards = forwards[:len(lefts)][:len(rights)]
+print(len(forwards))
 lefts = lefts[:len(forwards)]
+print(len(lefts))
 rights = rights[:len(rights)]
+print(len(rights))
 
 final_data = forwards + lefts + rights
 print(len(forwards))
@@ -63,30 +66,31 @@ print(np_final_data.shape)
 seed(42)
 r = 0
 l = 0
-for x in np_final_data:
-	# if x[1] == [0,1,0]:
-	# 	print('forward')
-	if x[1] == [0,0,1]:
-		r = r + 1
-		print('right')
-	if x[1] == [1,0,0]:
-		l = l + 1
-		print('left')
+# for x in np_final_data:
+# 	# if x[1] == [0,1,0]:
+# 	# 	print('forward')
+# 	if x[1] == [0,0,1]:
+# 		r = r + 1
+# 		print('right')
+# 	if x[1] == [1,0,0]:
+# 		l = l + 1
+# 		print('left')
 
 print('before the shuffle ')
 
 indices = np.random.permutation(len(np_final_data))
 np_final_data = np_final_data[indices]
+
 r = 0
 l = 0
-for x in np_final_data:
-	# if x[1] == [0,1,0]:
-	# 	print('forward')
-	if x[1] == [0,0,1]:
-		r = r + 1
-		print('right')
-	if x[1] == [1,0,0]:
-		l = l + 1
-		print('left')
+# for x in np_final_data:
+# 	# if x[1] == [0,1,0]:
+# 	# 	print('forward')
+# 	if x[1] == [0,0,1]:
+# 		r = r + 1
+# 		print('right')
+# 	if x[1] == [1,0,0]:
+# 		l = l + 1
+# 		print('left')
 print(len(np_final_data))
 np.save('train_data_v2.npy', np_final_data)
