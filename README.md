@@ -1,5 +1,8 @@
-# GTA-5-Lane-detection
-Just a script for detecting the lanes in any car game (not just gta 5) with specific resolution and road design ( very basic and limited )
+# Self Driving Car with AlexNet !
 
+
+
+#The almost 3k steps stats are from a 25k frames dataset
+# Loss 0.25 and Acc 0.92 enough
 <img src="https://github.com/DreadPirate09/GTA-5-Lane-detection/blob/main/sample2.png">
-![](https://ibb.co/XWXTNkX)
+![](https://ibb.co/BCPdDrh)

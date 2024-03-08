@@ -25,13 +25,13 @@ def straight():
     ReleaseKey(D)
 
 def left():
-    if delay(5) == True:
+    if delay(2) == True:
         PressKey(W)
     PressKey(A)
     ReleaseKey(D)
 
 def right():
-    if delay(5) == True:
+    if delay(2) == True:
         PressKey(W)
     PressKey(D)
     ReleaseKey(A)
@@ -83,11 +83,13 @@ def delay(sec):
     print(now.second)
     print(lastActionFw.second)
 
-    if lastActionFw.second + sec < 60 and sec < (now.second - lastActionFw.second):
+
+
+    if lastActionFw.second + sec <= 59 and sec < (now.second - lastActionFw.second):
         lastActionFw = datetime.datetime.now()
         print('delay true')
         return True
-    elif lastActionFw.second + sec > 60  and (60 - lastActionFw.second + now.second) > sec:
+    elif lastActionFw.second + sec > 59  and (60 - lastActionFw.second + now.second) > sec:
         lastActionFw = datetime.datetime.now()
         print('delay true')
         return True

@@ -1,8 +1,3 @@
-# direct inputs
-# source to this solution and code:
-# http://stackoverflow.com/questions/14489013/simulate-python-keypresses-for-controlling-a-game
-# http://www.gamespp.com/directx/directInputKeyboardScanCodes.html
-
 import ctypes
 import time
 
@@ -44,8 +39,6 @@ class Input_I(ctypes.Union):
 class Input(ctypes.Structure):
     _fields_ = [("type", ctypes.c_ulong),
                 ("ii", Input_I)]
-
-# Actuals Functions
 
 def PressKey(hexKeyCode):
     extra = ctypes.c_ulong(0)

@@ -15,13 +15,7 @@ else:
     training_data = []
 
 def keys_to_output(keys):
-    '''
-    Convert keys to a ...multi-hot... array
-
-    [A,W,D] boolean values.
-    '''
     output = [0,0,0]
-    
     if 'A' in keys:
         output[0] = 1
     elif 'D' in keys:
