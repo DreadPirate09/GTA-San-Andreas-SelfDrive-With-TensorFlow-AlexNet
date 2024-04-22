@@ -47,9 +47,9 @@ def showImage(img):
 
 def get_specified_square_screen(x1, y1, x2, y2):
     screen = grab_screen(region=(x1, y1, x2, y2))
-    if screen is not None:
-        screen = cv2.cvtColor(screen, cv2.COLOR_BGR2GRAY)
-    else:
+    # if screen is not None:
+    #     screen = cv2.cvtColor(screen, cv2.COLOR_BGR2GRAY)
+    if screen is None:
         print("Error: Screen capture failed.")
 
     center = (screen.shape[1] // 2, screen.shape[0] // 2)  # Center of the image
@@ -61,11 +61,10 @@ def get_specified_square_screen(x1, y1, x2, y2):
 
 def get_specified_circle_screen(x1, y1, x2, y2, radius):
     screen = grab_screen(region=(x1, y1, x2, y2))
-    if screen is not None:
-        screen = cv2.cvtColor(screen, cv2.COLOR_BGR2GRAY)
-    else:
+    # if screen is not None:
+    #     screen = cv2.cvtColor(screen, cv2.COLOR_BGR2GRAY)
+    if screen is None:
         print("Error: Screen capture failed.")
-
     center = (screen.shape[1] // 2, screen.shape[0] // 2)  # Center of the image
     mask = np.zeros_like(screen)
     cv2.circle(mask, center, radius, (255, 255, 255), -1)
@@ -114,7 +113,7 @@ def main():
             print('loop took {} seconds'.format(time.time()-last_time))
             last_time = time.time()
             screen = cv2.resize(screen, (80,30))
-            moves = list(np.around(model.predict([screen.reshape(80,30,1)])[0]))
+            moves = list(np.around(model.predict([screen.reshape(80,30,3)])[0]))
             if moves == [1,0,0]:
                 left()
             elif moves == [0,1,0]:

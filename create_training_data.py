@@ -32,9 +32,9 @@ def showImage(img):
 
 def get_specified_square_screen_no_map(x1, y1, x2, y2):
     screen = grab_screen(region=(x1, y1, x2, y2))
-    if screen is not None:
-        screen = cv2.cvtColor(screen, cv2.COLOR_BGR2GRAY)
-    else:
+    # if screen is not None:
+        # screen = cv2.cvtColor(screen, cv2.COLOR_BGR2GRAY)   # looks like is not ok to convert to greyscale form rgb while training in AlexNet
+    if screen is None:
         print("Error: Screen capture failed.")
 
     center = (screen.shape[1] // 2, screen.shape[0] // 2)  # Center of the image
@@ -46,17 +46,17 @@ def get_specified_square_screen_no_map(x1, y1, x2, y2):
 
 def get_specified_square_screen(x1, y1, x2, y2):
     screen = grab_screen(region=(x1, y1, x2, y2))
-    if screen is not None:
-        screen = cv2.cvtColor(screen, cv2.COLOR_BGR2GRAY)
-    else:
+    # if screen is not None:
+        # screen = cv2.cvtColor(screen, cv2.COLOR_BGR2GRAY)   # looks like is not ok to convert to greyscale form rgb while training in AlexNet
+    if screen is None:
         print("Error: Screen capture failed.")
     return screen
 
 def get_specified_circle_screen(x1, y1, x2, y2, radius):
     screen = grab_screen(region=(x1, y1, x2, y2))
-    if screen is not None:
-        screen = cv2.cvtColor(screen, cv2.COLOR_BGR2GRAY)
-    else:
+    # if screen is not None:
+        # screen = cv2.cvtColor(screen, cv2.COLOR_BGR2GRAY)   # looks like is not ok to convert to greyscale form rgb while training in AlexNet
+    if screen is None:
         print("Error: Screen capture failed.")
 
     center = (screen.shape[1] // 2, screen.shape[0] // 2)  # Center of the image

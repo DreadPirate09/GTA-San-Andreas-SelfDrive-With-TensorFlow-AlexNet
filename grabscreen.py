@@ -28,9 +28,11 @@ def grab_screen(region=None):
     img = np.fromstring(signedIntsArray, dtype='uint8')
     img.shape = (height,width,4)
 
+    img = img[:, :, :3]
+
     srcdc.DeleteDC()
     memdc.DeleteDC()
     win32gui.ReleaseDC(hwin, hwindc)
     win32gui.DeleteObject(bmp.GetHandle())
 
-    return cv2.cvtColor(img, cv2.COLOR_BGRA2RGB)
+    return img
