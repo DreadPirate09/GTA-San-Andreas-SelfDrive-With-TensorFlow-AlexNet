@@ -8,13 +8,14 @@ from directkeys import PressKey,ReleaseKey, W, A, S, D
 from alexnet import alexnet
 import time
 import datetime
+import configparser
 
-print('we import everithing')
+config = configparser.ConfigParser()
+config.read('configs/capture_dimensions.ini')
 
+WIDTH = int(config['dimensions']['width'])
+HEIGHT = int(config['dimensions']['height'])
 
-
-WIDTH = 80
-HEIGHT = 30
 LR = 1e-3
 EPOCHS = 8
 MODEL_NAME = 'pygta5-car-{}-{}-{}-epochs.model'.format(LR, 'alexnetv2',EPOCHS)
@@ -109,11 +110,11 @@ def main():
         if not paused:
             # 800x600 windowed mode
             # screen =  np.array(ImageGrab.grab(bbox=(0,340,800,640)))
-            screen = get_specified_square_screen(0, 300, 800, 600)
+            screen = get_specified_square_screen(0, 150, 800, 600)
             print('loop took {} seconds'.format(time.time()-last_time))
             last_time = time.time()
-            screen = cv2.resize(screen, (80,30))
-            moves = list(np.around(model.predict([screen.reshape(80,30,3)])[0]))
+            screen = cv2.resize(screen, (80,45))
+            moves = list(np.around(model.predict([screen.reshape(80,45,3)])[0]))
             if moves == [1,0,0]:
                 left()
             elif moves == [0,1,0]:

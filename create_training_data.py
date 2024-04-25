@@ -4,6 +4,13 @@ import cv2
 import time
 from getkeys import key_check
 import os
+import configparser
+
+config = configparser.ConfigParser()
+config.read('configs/capture_dimensions.ini')
+
+WIDTH = int(config['dimensions']['width'])
+HEIGHT = int(config['dimensions']['height'])
 
 file_name = 'training_data.npy'
 
@@ -77,11 +84,11 @@ def main():
         # 800x600 windowed mode
         print('getting the frame with number: '+str(len(training_data)))
         # screen = get_specified_circle_screen(100, 1100, 300, 1300, 100)
-        screen = get_specified_square_screen(0, 300, 800, 600);
+        screen = get_specified_square_screen(0, 150, WIDTH*10, HEIGHT*10+150);
         showImage(screen)
         last_time = time.time()
         # resize to something a bit more acceptable for a CNN
-        screen = cv2.resize(screen, (80,30))
+        screen = cv2.resize(screen, (WIDTH,HEIGHT))
         keys = key_check()
         output = keys_to_output(keys)
         training_data.append([screen,output])

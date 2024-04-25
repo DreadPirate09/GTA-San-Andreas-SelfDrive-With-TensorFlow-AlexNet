@@ -1,8 +1,13 @@
 import numpy as np
 from alexnet import alexnet
+import configparser
 
-WIDTH = 80
-HEIGHT = 30
+config = configparser.ConfigParser()
+config.read('configs/capture_dimensions.ini')
+
+WIDTH = int(config['dimensions']['width'])
+HEIGHT = int(config['dimensions']['height'])
+
 LR = 1e-3
 EPOCHS = 8
 MODEL_NAME = 'pygta5-car-{}-{}-{}-epochs.model'.format(LR, 'alexnetv2',EPOCHS)
@@ -11,8 +16,8 @@ model = alexnet(WIDTH, HEIGHT, LR)
 
 train_data = np.load('train_data_v2.npy',allow_pickle=True)
 
-train = train_data[:-500]
-test = train_data[-500:]
+train = train_data[:-int(len(train_data)/100 * 20)]
+test = train_data[-int(len(train_data)/100 * 80):]
 
 X = np.array([i[0] for i in train]).reshape(-1,WIDTH,HEIGHT,3)
 
